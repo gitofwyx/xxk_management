@@ -38,7 +38,7 @@
     <spymemcached.version>2.10.3</spymemcached.version>
     <ehcache.version>2.8.0</ehcache.version>
     <poi.version>3.9</poi.version>
-    <mysql-connector-java.version>5.1.6</mysql-connector-java.version>
+    <mysql-connector-java.version>8.0.16</mysql-connector-java.version>
   </properties>
 
   <dependencies>
