@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="xxk_management:war exploded">
-    <output-path>$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT</output-path>
+    <output-path>$PROJECT_DIR$/target/xxk_managementUs4-1.0-SNAPSHOT</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
@@ -14,19 +14,19 @@
           <element id="module-output" name="xxk_management" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: org.springframework:spring-aspects:3.2.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.7.2" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-aop:3.2.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-beans:3.2.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-context:3.2.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:3.2.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-expression:3.2.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-core:3.2.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:3.2.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-orm:3.2.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-tx:3.2.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-web:3.2.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:3.2.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aspects:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.9" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-core:1.2.3" />
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-web:1.2.3" />
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-ehcache:1.2.3" />
@@ -80,7 +80,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/xxk_managementUs4-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="xxk_management/web/Web" />
     </root>
