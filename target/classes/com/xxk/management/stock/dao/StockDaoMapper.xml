@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xxk.management.stock.dao.StockDao">
-    <sql id="columns">id,stock_ident,class_id,entity_id,stock_type,stock_office_id,stock_no,stock_unit,stock_proportion,stock_total,
+    <sql id="columns">id,stock_ident,class_id,entity_id,stock_type,stock_office_id,stock_no,stock_unit,stock_proportion,stock_total,stock_idle_total,
         stock_configured_total,stock_total_unit,stock_flag,remark,keyWord,stock_version,createUserId,createDate,updateUserId,updateDate,deleteFlag</sql>
 
     <!--获取分页 -->
@@ -48,7 +48,7 @@
     <!--添加信息 --><!--设置版本号为1-->
     <insert id="addStock" parameterType="com.xxk.management.stock.entity.Stock">
         insert into xxk_stock(<include refid="columns"></include>) values(
-        #{id},#{stock_ident},#{class_id},#{entity_id},#{stock_type},#{stock_office_id},#{stock_no},#{stock_unit},#{stock_proportion},#{stock_total},
+        #{id},#{stock_ident},#{class_id},#{entity_id},#{stock_type},#{stock_office_id},#{stock_no},#{stock_unit},#{stock_proportion},#{stock_total},#{stock_total},
         0,#{stock_total_unit},#{stock_flag},#{remark},#{keyWord},1,#{createUserId},#{createDate},#{updateUserId},#{updateDate},#{deleteFlag});
     </insert>
 
@@ -56,8 +56,8 @@
     <insert id="addStockForOfficesStorage" parameterType="com.xxk.management.office.storage.entity.OfficesStorage">
         insert into xxk_stock(<include refid="columns"></include>) values(
         #{id},#{offices_storage_ident},#{class_id},#{entity_id},#{offices_storage_type},#{offices_storage_officeId},#{offices_storage_no},#{offices_storage_unit},
-        #{offices_storage_proportion},#{offices_storage_total},0,#{offices_storage_unit},#{entity_entry_status},#{keyWord},1,#{createUserId},#{createDate},
-        #{updateUserId},#{updateDate},#{deleteFlag});
+        #{offices_storage_proportion},#{offices_storage_total},#{offices_storage_total},0,#{offices_storage_unit},#{entity_entry_status},#{keyWord},1,#{createUserId},
+        #{createDate}, #{updateUserId},#{updateDate},#{deleteFlag});
     </insert>
 
     <!--根据id获取信息 -->
@@ -86,33 +86,35 @@
 
     <!--入库更新 -->
     <update id="plusStockNo" parameterType="com.xxk.management.stock.entity.Stock">
-        update xxk_stock set stock_no=#{stock_no},stock_total=stock_total+#{stock_total},stock_version=stock_version+1,
-        updateUserId=#{updateUserId},updateDate=#{updateDate} where id=#{id} and stock_version=#{stock_version} and deleteFlag='0';
+        update xxk_stock set stock_no=#{stock_no},stock_total=stock_total+#{stock_total},stock_idle_total=stock_idle_total+#{stock_total},
+        stock_version=stock_version+1,updateUserId=#{updateUserId},updateDate=#{updateDate} where id=#{id} and stock_version=#{stock_version}
+        and deleteFlag='0';
     </update>
 
     <!--入库更新 反出库 -->
     <update id="plusStockNoById" >
-        update xxk_stock set stock_no=#{1},stock_total=stock_total+#{2},
+        update xxk_stock set stock_no=#{1},stock_total=stock_total+#{2},stock_idle_total=stock_idle_total+#{2},
                              updateUserId=#{3},updateDate=#{4} where id=#{0} and deleteFlag='0';
     </update>
 
     <!--根据OfficesStorage入库更新 -->
     <update id="updateStockForOfficesStorage" parameterType="com.xxk.management.office.storage.entity.OfficesStorage">
-        update xxk_stock set stock_no=#{offices_storage_no},stock_total=stock_total+#{offices_storage_total},stock_version=stock_version+1,
-                             updateUserId=#{updateUserId},updateDate=#{updateDate} where id=#{id} and deleteFlag='0';
+        update xxk_stock set stock_no=#{offices_storage_no},stock_total=stock_total+#{offices_storage_total},stock_idle_total=stock_idle_total+#{offices_storage_total},
+                             stock_version=stock_version+1,updateUserId=#{updateUserId},updateDate=#{updateDate} where id=#{id} and deleteFlag='0';
     </update>
 
     <!--配置库存增加1 -->
     <update id="plusStockConfiguredTotal">
-        update xxk_stock set stock_configured_total=stock_configured_total+1,stock_version=stock_version+1,
+        update xxk_stock set stock_configured_total=stock_configured_total+1,stock_idle_total=stock_idle_total-1,stock_version=stock_version+1,
                              updateUserId=#{1},updateDate=#{2}
-        where id=#{0} and stock_total&gt;stock_configured_total and stock_version=#{3} and deleteFlag='0';
+        where id=#{0} and stock_total&gt;stock_configured_total and stock_idle_total>0 and stock_version=#{3} and deleteFlag='0';
     </update>
 
     <!--出库更新 -->
     <update id="reduceStockNo" parameterType="com.xxk.management.stock.entity.Stock">
-        update xxk_stock set stock_no=#{stock_no},stock_total=stock_total-#{stock_total},stock_version=stock_version+1,updateUserId=#{updateUserId},
-        updateDate=#{updateDate} where id=#{id} and stock_total>=#{stock_total} and stock_version=#{stock_version} and deleteFlag='0';
+        update xxk_stock set stock_no=#{stock_no},stock_total=stock_total-#{stock_total},stock_idle_total=stock_idle_total+#{stock_total},
+                             stock_version=stock_version+1,updateUserId=#{updateUserId},updateDate=#{updateDate} where id=#{id}
+                             and stock_idle_total>=#{stock_total} and stock_version=#{stock_version} and deleteFlag='0';
     </update>
 
     <!--出库更新（单个设备、耗材） -->

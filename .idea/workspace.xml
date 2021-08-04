@@ -9,12 +9,14 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96781760-f708-4b19-b4f7-7da62f6fd708" name="Default" comment="2021年7月31日 04:10:42 转移入库">
+    <list default="true" id="96781760-f708-4b19-b4f7-7da62f6fd708" name="Default" comment="2021年7月31日 07:50:00 新增字段stock表stock_idle_total">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/stock/dao/StockDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/stock/dao/StockDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/stock/entity/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/stock/entity/Stock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xxk_management.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/xxk_management.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xxk_management.pdm" beforeDir="false" afterPath="$PROJECT_DIR$/xxk_management.pdm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xxk/management/stock/controller/StockController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xxk/management/stock/controller/StockController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xxk/management/stock/dao/StockDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xxk/management/stock/dao/StockDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xxk/management/stock/entity/Stock.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xxk/management/stock/entity/Stock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/stock/controller/StockController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/stock/controller/StockController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/stock/dao/StockDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/stock/dao/StockDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/stock/entity/Stock.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/stock/entity/Stock.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -2094,14 +2096,11 @@
       <workItem from="1627676068570" duration="609000" />
       <workItem from="1627686351337" duration="1469000" />
       <workItem from="1627687838237" duration="824000" />
-      <workItem from="1627688680042" duration="310000" />
-    </task>
-    <task id="LOCAL-00101" summary="2021年5月14日 18:00:55">
-      <created>1620986461010</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1620986461010</updated>
+      <workItem from="1627688680042" duration="532000" />
+      <workItem from="1627689764480" duration="580000" />
+      <workItem from="1627728388284" duration="3128000" />
+      <workItem from="1627841138502" duration="676000" />
+      <workItem from="1627940816150" duration="117000" />
     </task>
     <task id="LOCAL-00102" summary="2021年5月14日 18:00:55">
       <created>1621957342110</created>
@@ -2439,7 +2438,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627675847717</updated>
     </task>
-    <option name="localTasksCounter" value="150" />
+    <task id="LOCAL-00150" summary="2021年7月31日 07:50:00 新增字段stock表stock_idle_total">
+      <created>1627689035259</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
+      <option name="project" value="LOCAL" />
+      <updated>1627689035260</updated>
+    </task>
+    <option name="localTasksCounter" value="151" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -2546,7 +2552,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="2021年6月13日 22:25:51" />
     <MESSAGE value="2021年6月13日 22:51:52" />
     <MESSAGE value="2021年6月13日 23:49:18" />
     <MESSAGE value="2021年6月16日 22:09:58" />
@@ -2571,7 +2576,8 @@
     <MESSAGE value="2021年7月30日 14:23:51 转移入库" />
     <MESSAGE value="2021年7月31日 02:27:03 转移入库" />
     <MESSAGE value="2021年7月31日 04:10:42 转移入库" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021年7月31日 04:10:42 转移入库" />
+    <MESSAGE value="2021年7月31日 07:50:00 新增字段stock表stock_idle_total" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021年7月31日 07:50:00 新增字段stock表stock_idle_total" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
