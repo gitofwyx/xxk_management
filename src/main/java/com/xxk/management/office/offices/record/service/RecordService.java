@@ -14,7 +14,7 @@ public interface RecordService {
 
     public boolean addRecord(Record record);
 
-    public Map<String, Object> getRecordByOffices(String rec_office_id,String date);
+    public Map<String, Object> getRecordByOffices(String rec_office_id, String date);
 
     public boolean plusRegCount(Record record);
 

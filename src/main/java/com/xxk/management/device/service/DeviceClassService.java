@@ -19,13 +19,13 @@ public interface DeviceClassService {
 
     public List<Map<String, Object>> listMaterialOfTab(String tab);
 
-    public boolean addDeviceClass(DeviceClass deviceClass);
+    //public boolean addDeviceClass(DeviceClass deviceClass);
 
    // public DeviceClass getDeviceClassById(String id);
 
     public List<Map<String, Object>> getDeviceClassById(String id);
 
-    public String updateEntityClass(DeviceClass entityClass,String Date);
+    public String updateEntityClass(DeviceClass entityClass, String Date);
 
     public boolean updateDevMax(DeviceClass deviceClass);
 

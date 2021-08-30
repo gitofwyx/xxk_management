@@ -16,7 +16,7 @@ public interface RecordDao {
 
     public int addRecord(Record record);
 
-    public Map<String, Object> getRecordByOffices(String rec_office_id,String date);
+    public Map<String, Object> getRecordByOffices(String rec_office_id, String date);
 
     public int plusRegCount(Record record);
 

@@ -1,7 +1,7 @@
 package com.xxk.management.system.web;
 
-import com.xxk.management.user.entity.RegUser;
-import com.xxk.management.user.service.RebUserService;
+import com.xxk.management.system.entity.Sysadmin;
+import com.xxk.management.system.service.SysadminService;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class KelanRealm extends AuthorizingRealm {
 
 	@Autowired
-	private RebUserService userService;
+	private SysadminService sysadminService;
 
 	private static Logger log = Logger.getLogger(KelanRealm.class);
 
@@ -36,17 +36,17 @@ public class KelanRealm extends AuthorizingRealm {
 		Session session = currentUser.getSession();
 		String realmName = getName();
 		String account = usernamePasswordToken.getUsername();
-		RegUser user = userService.getUserByAccount(account);
+		Sysadmin sysadmin = sysadminService.getSysadminByAccount(account);
 		SimpleAuthenticationInfo info = null;
-		if (user != null) {
-			info = new SimpleAuthenticationInfo(account, user.getPassword(), realmName);
+		if (sysadmin != null) {
+			info = new SimpleAuthenticationInfo(account, sysadmin.getPassword(), realmName);
 		} else {
 			session.setAttribute("error", "用户没有登录");
 			log.warn("用户没有登录");
 			throw new UnknownAccountException("用户不存在");
 		}
-		session.setAttribute("userId", user.getId());
-		session.setAttribute("userName", user.getName());
+		session.setAttribute("userId", sysadmin.getId());
+		session.setAttribute("userName", sysadmin.getName());
 		log.info("验证完成...");
 		return info;
 	}
@@ -58,7 +58,7 @@ public class KelanRealm extends AuthorizingRealm {
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		// 获取当前的登陆用的信息.
 		String account = (String) principals.getPrimaryPrincipal();
-		String role = userService.getRoleByAccount(account);
+		String role = sysadminService.getRoleBySysAccount(account);
 		info.addRole(role);
 		log.info("授权完成...");
 		return info;

@@ -1,0 +1,913 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> 搜索表单</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="/css/dpl-min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/dpl-supplement.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/bui-min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/page-min.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        code {
+            padding: 0px 4px;
+            color: #d14;
+            background-color: #f7f7f9;
+            border: 1px solid #e1e1e8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <form id="searchForm" class="form-horizontal span32" autocomplete="off">
+            <div class="row">
+                <div class="control-group span7">
+                    <label class="control-label">设备类别：</label>
+                    <div class="controls search_select" id="search_class_select">
+                        <input name="search_class_id" type="hidden" id="search_class_id">
+                    </div>
+                </div>
+                <div class="control-group span7">
+                    <label class="control-label">设备型号：</label>
+                    <div class="controls search_select" id="search_entity_select">
+                        <input name="search_entity_id" type="hidden" id="search_entity_id">
+                    </div>
+                </div>
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>库存类别：</label>
+                    <div class="controls search_select" id="search_type_select">
+                        <input name="search_type" type="hidden" id="search_type" value="1" data-rules="{required:true}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span9">
+                    <label class="control-label">库存科室：</label>
+                    <div class="controls" id="search_office_select">
+                        <input name="search_office_id" id="search_office_id" type="hidden">
+                    </div>
+                </div>
+                <div class="control-group span9">
+
+                </div>
+                <div class="span3 offset2">
+                    <button type="button" id="btnSearch" class="button button-primary">搜索</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="search-grid-container">
+        <div id="grid"></div>
+    </div>
+
+</div>
+<div id="Content_I" class="hide">
+    <form id="I_Form" class="form-horizontal" action="" autocomplete="off">
+        <div id="tab_I"></div>
+        <hr style="margin-top:0.3px;height:1px;border:none;border-top:1px solid #b9b9b9;">
+        <div class="row">
+            <div class="control-group span8">
+                <label class="control-label"><s>*</s>设备名称：</label>
+                <div class="controls" id="dev_name_select">
+                    <input name="class_id" type="hidden" id="class_id" data-rules="{required:true}">
+                </div>
+            </div>
+            <div class="control-group span8">
+                <label class="control-label"><s>*</s>设备型号：</label>
+                <div class="controls" id="dev_type_select">
+                    <input name="entity_id" type="hidden" id="entity_id" data-rules="{required:true}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="control-group span8">
+                <label class="control-label"><s>*</s>入库科室：</label>
+                <div class="controls" id="stock_office_select">
+                    <input name="stock_office_id" id="stock_office_id" type="hidden" data-rules="{required:true}">
+                </div>
+            </div>
+            <div class="control-group span8">
+                <label class="control-label"><s>*</s>入库确认人：</label>
+                <div class="controls">
+                    <input name="in_confirmed_by" type="text" data-rules="{required:true}"
+                           class="input-normal control-text">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="control-group span16">
+                <label class="control-label"><s>*</s>库存记录：</label>
+                <div class="controls" id="stock_record_select">
+                    <input id="stock_record_id" name="stock_record_id" type="hidden">
+                </div>
+                &nbsp;
+                <input type="button" id="I_Reset" name="I_Reset" class=" icon-repeat"
+                       style="width:15px;height:18px;background-color:#ffffff;">
+            </div>
+
+        </div>
+        <div id="I_Input_console">
+            <div class="row">
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>入库数量：</label>
+                    <div class="controls">
+                        <input name="in_confirmed_no" id="in_confirmed_no" type="number" data-rules="{required:true}"
+                               min="0.1" data-tip="{text:'注:数量以单位数量为基准'}" class="input-normal control-text">
+                    </div>
+                </div>
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>库存单位：</label>
+                    <div class="controls">
+                        <input id="stock_unit" name="stock_unit" type="text" data-rules="{required:true}"
+                               class="input-normal control-text">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>入库/个体比例：</label>
+                    <div class="controls">
+                        <input id="unit_num" name="unit_num" type="number"
+                               class="span1 control-text"> ：
+                        <input id="stock_proportion" name="stock_proportion" type="number" min="1" max="999"
+                               data-rules="{required:true}" data-tip="{text:'数字有效'}" class="span2 control-text">
+                    </div>
+                </div>
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>入库时间：</label>
+                    <div class="controls">
+                        <input id="in_confirmed_date" name="in_confirmed_date" type="text"
+                               data-rules="{required:true}" class="calendar calendar-time">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>库存总量：</label>
+                    <div class="controls">
+                        <input id="stock_total" name="stock_total" type="number" data-rules="{required:true}"
+                               class="input-normal control-text">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span15">
+                    <label class="control-label">备注：</label>
+                    <div class="controls control-row3">
+                        <textarea name="remark" class="span11" type="text"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="control-group span2.5">
+                <input id="io_Console" name="io_Console" type="hidden"　data-rules="{required:true}">
+            </div>
+            <div class="control-group span2.5">
+                <input id="stock_type" name="stock_type" type="hidden"　data-rules="{required:true}">
+            </div>
+            <div class="control-group span2.5">
+                <input id="stock_no" name="stock_no" type="hidden" data-rules="{required:true}">
+            </div>
+            <div class="control-group span2.5">
+                <input id="in_confirmed_total" name="in_confirmed_total" type="hidden" data-rules="{required:true}">
+            </div>
+            <div class="control-group span2.5">
+                <input id="stock_version" name="stock_version" type="hidden" data-rules="{required:true}">
+            </div>
+        </div>
+    </form>
+</div>
+<div id="Content_O" class="hide">
+    <form id="O_Form" class="form-horizontal" action="" autocomplete="off">
+        <input type="hidden" name="office_ident" id="office_ident">
+        <div id="tab"></div>
+        <hr style="margin-top:0.3px;height:1px;border:none;border-top:1px solid #b9b9b9;">
+        <div class="row">
+            <div class="control-group span8">
+                <label class="control-label"><s>*</s>出库科室：</label>
+                <div class="controls">
+                    <input name="out_confirmed_offices" id="out_confirmed_offices" type="text" data-rules="{required:true}">
+                </div>
+            </div>
+            <div class="control-group span8">
+                <label class="control-label"><s>*</s>出库确认人：</label>
+                <div class="controls">
+                    <input name="out_confirmed_by" type="text" class="input-normal control-text">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="control-group span8">
+                <label class="control-label"><s>*</s>数量单位：</label>
+                <div class="controls">
+                    <input name="out_confirmed_unit" type="text" id="out_confirmed_unit" readonly="readonly" data-rules="{required:true}">
+                </div>
+            </div>
+            <div class="control-group span8">
+                <label class="control-label"><s>*</s>出库时间：</label>
+                <div class="controls">
+                    <input name="out_confirmed_date" type="text" data-rules="{required:true}" class="calendar calendar-time">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="control-group span8">
+                <label class="control-label"><s>*</s>库存总量：</label>
+                <div class="controls">
+                    <input id="stock_total2" name="stock_total" type="number" data-rules="{required:true}"
+                           readonly="readonly"  type="number" min="0" max="999" class="input-normal control-text">
+                </div>
+            </div>
+            <div class="control-group span8">
+                <label class="control-label"><s>*</s>出库数量：</label>
+                <div class="controls">
+                    <input name="out_confirmed_no" type="number" id="out_confirmed_no" value="1" data-rules="{required:true}"
+                           min="0.1" max="999"   class="input-normal control-text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span2.5">
+                    <input id="out_confirmed_officeId" name="out_confirmed_officeId" type="hidden" data-rules="{required:true}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span2.5">
+                    <input id="out_confirmed_total" name="out_confirmed_total" type="hidden" data-rules="{required:true}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span2.5">
+                    <input id="stock_no2" name="stock_no" type="hidden" data-rules="{required:true}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span2.5">
+                    <input id="stock_record_id2" name="stock_record_id" type="hidden" data-rules="{required:true}">
+                </div>
+            </div>
+            <div class="control-group span2.5">
+                <input id="entity_name" name="entity_name" type="hidden" data-rules="{required:true}">
+            </div>
+            <div class="control-group span2.5">
+                <input id="entity_type" name="entity_type" type="hidden" data-rules="{required:true}">
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="/js/bui.js" data-debug=true></script>
+<script type="text/javascript" src="/js/sea.js"></script>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/js/tree/json2.js"></script>
+<![endif]-->
+<script type="text/javascript" src="/js/tree/tree_build.js"></script>
+<script type="text/javascript" src="/js/localstorageIO.js"></script>
+<script type="text/javascript">
+    BUI.use('common/page');
+</script>
+<script type="text/javascript">
+    BUI.use(['common/search', 'bui/tab', 'bui/tooltip', 'bui/grid', 'bui/select', 'bui/picker','bui/list', 'bui/extensions/treepicker', 'bui/tree'],
+            function (Search, Tab, Tooltip, Grid,Select, Picker,List, TreePicker, Tree) {
+                var offices_select = localstorageIO("offices_select", "/getOfficeSelect");
+                var enumObj = {"1": "设备", "2": "配件","3":"耗材"},
+                //变量初始化
+                        select_data = [],
+                        select_type = [],
+                        stock_office = {},
+                        office_tree=null,
+                //搜索设备选择框
+                        search_class_select = new Select.Select({
+                            render: '#search_class_select',
+                            valueField: '#search_class_id',
+                            multipleSelect: false,
+                        }).render(),
+                //搜索型号选择框
+                        search_entity_select = new Select.Select({
+                            render: '#search_entity_select',
+                            valueField: '#search_entity_id',
+                            multipleSelect: false,
+                            items: []
+                        }).render(),
+                //库存类别选择框
+                        search_type_select = new Select.Select({
+                            render: '#search_type_select',
+                            valueField: '#search_type',
+                            multipleSelect: false,
+                            items: [
+                                {text: '设备', value: '1',name: 'DeviceSelect'},
+                                {text: '配件', value: '2',name: 'MaterialSelect'},
+                                {text: '耗材', value: '3',name: 'MaterialSelect'}
+                            ],
+                        }).render(),
+                //搜索栏科室下拉框
+                        search_office_select = new Select.Select({
+                            render: '#search_office_select',
+                            valueField: '#search_office_id',
+                            multipleSelect: false,
+                            items: []
+                        }).render();
+
+                //入库弹出框
+                var Editing_I = new BUI.Grid.Plugins.DialogEditing({
+                            contentId: 'Content_I', //设置隐藏的Dialog内容
+                            autoSave: true, //添加数据或者修改数据时，自动保存
+                            triggerCls: 'btn-edit'
+                        }),
+                //出库弹出框
+                        Editing_O = new BUI.Grid.Plugins.DialogEditing({
+                            contentId: 'Content_O', //设置隐藏的Dialog内容
+                            autoSave: true, //添加数据或者修改数据时，自动保存
+                            triggerCls: 'btn-out_dev'
+                        }),
+                        tab_I = new Tab.TabPanel({
+                            render: '#tab_I',
+                            elCls: 'button-tabs',
+                            panelContainer: '#panel',//如果内部有容器，那么会跟标签项一一对应，如果没有会自动生成
+                            //selectedEvent : 'mouseenter',//默认为click,可以更改事件
+                            children: [
+                                {id: 'dev_row', title: '设备', name: 'DeviceSelect', value: '1', selected: true},
+                                {id: 'matP_row', title: '配件', name: 'MaterialSelect', value: '2',},
+                                {id: 'matH_row', title: '耗材', name: 'MaterialSelect', value: '3',},
+                            ]
+                        }).render(),
+                //设备种类选择框
+                        dev_name_select = new Select.Select({
+                            render: '#dev_name_select',
+                            valueField: '#class_id',
+                            multipleSelect: false,
+                        }).render(),
+                //设备型号选择框
+                        dev_type_select = new Select.Select({
+                            render: '#dev_type_select',
+                            valueField: '#entity_id',
+                            multipleSelect: false,
+                            items: []
+                        }).render(),
+                //库存科室选择框
+                        stock_office_select = new Select.Select({
+                            render: '#stock_office_select',
+                            valueField: '#stock_office_id',
+                            multipleSelect: false,
+                            items: []
+                        }).render(),
+
+                        Sto_rec_grid = new Grid.Grid({
+                            idField: 'id',//选项的默认id字段
+                            columns: [
+                                {title: '库存编号', dataIndex: 'stock_ident', elCls: 'center', width: '30%'},
+                                {title: '数量', dataIndex: 'stock_no', elCls: 'center', width: '20%'},
+                                {title: '单位', dataIndex: 'stock_unit', elCls: 'center', width: '20%'},
+                                {title: '总量', dataIndex: 'stock_total', elCls: 'center', width: '30%'},
+                            ],
+                            textGetter: function (item) { //返回选中的文本
+                                return item.stock_ident;
+                            },
+                            bbar:{
+                                //可以是按钮(bar-item-button)、 文本(bar-item-text)、 默认(bar-item)、 分隔符(bar-item-separator)以及自定义项
+                                items:[{
+                                    xclass:'bar-item-button',
+                                    btnCls : 'button button-small',
+                                    text:'新增'
+                                },
+                                    {
+                                        xclass:'bar-item-text',
+                                        text:'<p style="color: #dd1144">注：新增多个库存记录可能会造成出库错误</p>'
+                                    },
+                                ]
+                            },
+                            items: [],
+                        }),
+                        stock_record_picker = new Picker.ListPicker({
+                            width: 300,  //指定宽度
+                            children: [Sto_rec_grid] //配置picker内的列表
+                        }),
+                        stock_record_select = new Select.Select({
+                            picker: stock_record_picker,
+                            render: '#stock_record_select',
+                            valueField: '#stock_record_id',
+                            forceFit: false,
+                            multipleSelect: false,
+                            width: 300,
+                            items: []
+                        }).render(),
+
+                        stock_office_tree = new Tree.TreeList({
+                            nodes: [],
+                            //store: store,
+                            //dirSelectable : false,//阻止树节点选中
+                            showLine: true //显示连接线
+                        }),
+                        stock_office_picker = new TreePicker({
+                            trigger: '#out_confirmed_offices',
+                            width: 150,  //指定宽度
+                            children: [stock_office_tree] //配置picker内的列表
+                        }).render(),
+
+                        columns = [
+                            {title: '&nbsp库存编号', dataIndex: 'stock_ident', elCls: 'center', width: 110},
+                            {title: '&nbsp库存名称', dataIndex: 'entity_name', elCls: 'center', width: 110},
+                            {title: '&nbsp库存型号', dataIndex: 'entity_type', elCls: 'center', width: 130},
+                            {title: '库存类别', dataIndex: 'stock_type', elCls: 'center', width: 70,renderer: BUI.Grid.Format.enumRenderer(enumObj)},
+                            {title: '&nbsp数量', dataIndex: 'stock_no', elCls: 'center', width: 70},
+                            {title: '&nbsp库存单位', dataIndex: 'stock_unit', elCls: 'center', width: 100},
+                            {title: '&nbsp总量', dataIndex: 'stock_total', elCls: 'center', width: 100},
+                            {title: '&nbsp库存状态', dataIndex: 'stock_flag', elCls: 'center', width: 100},
+                            {id: 'remark', title: '&nbsp备注', dataIndex: 'remark', elCls: 'center', width: 160},
+                            {
+                                title: '操作', dataIndex: '', width: 150, renderer: function (value, obj) {
+
+                                var editStr1 = Search.createLink({ //链接使用 此方式
+                                            id : 'storage-menu',
+                                            title : '入库记录',
+                                            text : '入库记录',
+                                            href : 'menu/storage_tab/'+obj.id,
+                                        }),
+                                        editStr2 = Search.createLink({ //链接使用 此方式
+                                            id : 'delivery-menu',
+                                            title : '出库记录',
+                                            text : '出库记录',
+                                            href : 'menu/delivery_tab/'+obj.id,
+                                        }),
+                                        delStr = '<span class="grid-command" title="删除信息">删除</span>';//页面操作不需要使用Search.createLink
+                                return editStr1 + editStr2+delStr;
+                            }
+                            }
+                        ],
+                        store = Search.createStore('/listStock', {
+                            proxy: {
+                                save: { //也可以是一个字符串，那么增删改，都会往那么路径提交数据，同时附加参数saveType
+                                    addUrl: '/addStock',
+                                    updateUrl: '/updateStock',
+                                    removeUrl: '../data/del.php'
+                                },
+                                method: 'POST'
+                            },
+                            pageSize: 12,
+                            autoSync: true //保存数据后，自动更新
+                        }),
+                        gridCfg = Search.createGridCfg(columns, {
+                            tbar: {
+                                items: [
+                                    {
+                                        text: '<i class="icon-plus"></i>设备入库',
+                                        btnCls: 'button button-small',
+                                        handler: in_storageFunction
+                                    },
+                                    {
+                                        text: '<i class="icon-hand-right"></i>设备出库',
+                                        btnCls: 'button button-small',
+                                        handler: outDevFunction
+                                    },
+                                    {
+                                        text: '<i class="icon-list"></i><a>入库记录</a>',
+                                        btnCls: 'button button-small',
+                                        handler: storageFunction
+                                    },
+                                    {
+                                        text: '<i class="icon-list"></i><a>出库记录</a>',
+                                        btnCls: 'button button-small',
+                                        handler: deliveryFunction
+                                    }
+                                ]
+                            },
+                            plugins: [Editing_I, Editing_O, BUI.Grid.Plugins.CheckSelection, BUI.Grid.Plugins.AutoFit,BUI.Grid.Plugins.columnresize],// 插件形式引入多选表格
+                            emptyDataTpl: '<div class="centered"><img alt="Crying" src="http://img03.taobaocdn.com/tps/i3/T1amCdXhXqXXXXXXXX-60-67.png"><h2>未获得到数据</h2></div>',
+                        });
+
+                var search = new Search({
+                            store: store,
+                            gridCfg: gridCfg
+                        }),
+                        grid = search.get('grid'),
+                        C_Form=search.get('form'),
+                        I_Form = Editing_I.get('form'),
+                        O_Form = Editing_O.get('form');
+
+                grid.set('multipleSelect',false);
+                search_office_select.set('items', stock_officeSelect());
+
+                var search_grid_tip = new Tooltip.Tip({
+                    trigger: '.grid-td-remark', //出现此样式的元素显示tip
+                    alignType: 'bottom-left',
+                    offset: 1,
+                    width: 150,
+                    title: '',
+                    elCls: 'tips',
+                    titleTpl: '<p>{title}</p>'
+                }).render();
+
+                function storageFunction() {
+                    if (top.topManager) {
+                        top.topManager.openPage({ //打开左侧菜单中配置过的页面
+                            id: 'storage-menu',
+                            href: 'menu/storage_tab/EV',
+                            title: '入库记录'
+                        });
+                    }
+                }
+
+                function deliveryFunction() {
+                    if (top.topManager) {
+                        top.topManager.openPage({ //打开左侧菜单中配置过的页面
+                            id: 'delivery-menu',
+                            href: 'menu/delivery_tab/EV',//传递空变量
+                            title: '出库记录',
+                        });
+                    }
+                }
+
+                //入库输入框重置
+                function I_Reset() {
+                    I_Form.clearFields();
+                    stock_office_select.setSelectedValue();
+                    dev_type_select.setSelectedValue();
+                    dev_name_select.setSelectedValue();
+                    Sto_rec_grid.set('items', []);
+                    input_console(true);
+                    $("#stock_version").val(0);
+                }
+
+                //禁止输入框输入
+                function input_console(dis) {
+                    $("#stock_record_id").val('');
+                    $("#I_Input_console input").each(function () {
+                        $(this).val('');
+                        $(this).attr('disabled', dis);
+                    })
+                }
+
+                //下拉框ajax请求entity_selectAjax
+                function entity_selectAjax(n,v) {
+                    var url = '/get' + n;
+                    if ($.isEmptyObject(select_data)) {
+                        $.ajax({
+                            url: url,
+                            data: {tab: v},
+                            type: 'POST', //GET
+                            async: true,    //或false,是否异步
+                            /*timeout: 5000,*/    //超时时间(如果后台数据加载缓慢，设置超时时间会导致在时间超时后自动执行success函数而后台还没有返回data数据)
+                            dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+                            success: function (data, textStatus, jqXHR) {
+                                if (data != null && data != undefined) {
+                                    select_data = data;
+                                    search_class_select.set('items', select_data.Class_data);
+                                    dev_name_select.set('items', select_data.Class_data);
+                                }
+                            },
+                            error: function (xhr, textStatus) {
+                                console.log('错误')
+                                console.log(xhr)
+                                console.log(textStatus)
+                            }
+                        })
+                    }
+                }
+
+                //下拉框ajax请求office_selectAjax--科室信息数据获取
+                function office_selectAjax() {
+                    if (offices_select == undefined || offices_select == null) {
+                        offices_select = localstorageIO("offices_select", "/getOfficeSelect");
+                        if (offices_select == null) {   //offices_select为null表示浏览器不支持localstorage
+                            alert("浏览器不支持localstorage！");
+                            $.ajax({
+                                url: '/getOfficeSelect',
+                                type: 'POST', //GET
+                                async: true,    //或false,是否异步
+                                /*timeout: 5000,*/    //超时时间(如果后台数据加载缓慢，设置超时时间会导致在时间超时后自动执行success函数而后台还没有返回data数据)
+                                dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+                                success: function (data, textStatus, jqXHR) {
+                                    if (data != null && data != undefined) {
+                                        offices_select = data.result;
+                                        stock_office_select.set('items', stock_officeSelect());
+                                    }
+                                },
+                                error: function (xhr, textStatus) {
+                                    console.log('错误')
+                                    console.log(xhr)
+                                    console.log(textStatus)
+                                }
+                            })
+                        }
+                    }
+                    if(office_tree==null){
+                        office_tree=GetMenus('root', offices_select);
+                    }
+                }
+
+                //库存科室下拉框数据生成
+                function stock_officeSelect() {
+                    if (stock_office == undefined || $.isEmptyObject(stock_office)) {
+                        for (var i in offices_select) {
+                            if (offices_select[i].office_function == '1') {
+                                stock_office[offices_select[i].value] = offices_select[i].text;
+                            }
+                        }
+                    }
+                    return stock_office;
+                }
+
+                //入库总量生成
+                function reckon_stock_total(num, stock_proportion) {  //（输入的库存数量 库存比例)
+                    //I_Form.getField('in_confirmed_no').get('value');
+                    num=""+num;//防止输入数值造成replace函数报错；
+                    var decimal =num.replace(/\d+\.(\d*)/,"$1");//获取小数部分
+                    var unit = parseInt(num);//去除小数部分
+                    stock_proportion = parseInt(stock_proportion);//防止比例数输入为小数
+                    if(parseFloat(num)!=unit){
+                        unit=unit*stock_proportion;
+                        return unit+parseInt(decimal);
+                    }
+                    return unit*stock_proportion;
+                }
+
+                //根据比例调整库存数量
+                function calculate_amount(num, stock_proportion) { //数量，比例数
+                    //I_Form.getField('in_confirmed_no').get('value');
+                    num=""+num;//防止输入数值造成replace函数报错；
+                    var decimal =num.replace(/\d+\.(\d*)/,"$1");//获取小数部分
+                    var unit = parseInt(num);//去除小数部分
+                    stock_proportion = parseInt(stock_proportion);//防止比例数输入为小数
+                    decimal=parseInt(decimal);
+                    if(parseFloat(num)==unit){
+                        return num;
+                    }
+                    else if (decimal >= stock_proportion) {
+                        var mu = parseInt(decimal / stock_proportion);//求小数部分有多少单位数量
+                        unit = unit + mu; //单位数量相加
+                        decimal = decimal - (mu * stock_proportion);
+                        while (decimal >= 1) {
+                            decimal = decimal / 10;
+                        }
+                        num = unit + decimal;
+                    }
+                    return num;
+                }
+
+                //根据库存总量生成库存数量
+                function makeInNum(total, stock_proportion) { //总量，比例数
+                    var num=total%stock_proportion;
+                    while (num>=1){
+                        num= num/10;
+                    }
+                    num=parseInt(total/stock_proportion)+num;
+                    return num;
+                }
+
+                //入库操作
+                function in_storageFunction() {
+
+                    entity_selectAjax(tab_I.getSelected().__attrVals.name,tab_I.getSelected().__attrVals.value);
+                    office_selectAjax();
+                    Sto_rec_grid.set('items', []);
+                    dev_type_select.set('items', []);
+                    dev_name_select.set('items', select_data.Class_data);
+                    stock_office_select.set('items', stock_officeSelect());
+                    var newData = {isNew: true}; //标志是新增加的记录
+                    Editing_I.add(newData, 'name'); //添加记录后，直接编辑
+                    I_Form.getField('io_Console').set('value', '1');
+                    I_Form.getField('stock_type').set('value', tab_I.getSelected().__attrVals.value);
+                    $("#stock_version").val(0);
+                    input_console(true);
+                }
+
+                //编辑操作
+                function updateFunction() {
+                    var selections = grid.getSelection();
+                    if (selections.length == 0) {
+                        return;
+                    } else if (selections.length != 1) {
+                        BUI.Message.Alert('一次只能编辑一条记录！！');
+                        return;
+                    } else {
+                        var eData = selections[0];
+                        Editing_I.edit(eData);
+                    }
+                }
+
+                //出库操作
+                function outDevFunction() {
+                    office_selectAjax();
+                    stock_office_tree.set('nodes', office_tree);
+                    var selections = grid.getSelection();
+                    if (selections.length == 0) {
+                        return;
+                    } else if (selections.length != 1) {
+                        BUI.Message.Alert('一次只能选择单个设备出库！！');
+                        return;
+                    } else {
+                        var eData = selections[0];
+                        Editing_O.edit(eData);
+                        O_Form.getField('stock_record_id').set('value',eData.id);
+                        O_Form.getField('out_confirmed_unit').set('value',eData.stock_unit);
+                        O_Form.getField('entity_name').set('value',eData.entity_name);
+                        O_Form.getField('entity_type').set('value',eData.entity_type);
+                    }
+                }
+
+                //删除操作
+                function delFunction() {
+                    var selections = grid.getSelection();
+                    delItems(selections);
+                }
+
+                function delItems(items) {
+                    var ids = [];
+                    BUI.each(items, function (item) {
+                        ids.push(item.id);
+                    });
+                    if (ids.length) {
+                        BUI.Message.Confirm('确认要删除选中的记录么？', function () {
+                            store.save('remove', {ids: ids});
+                        }, 'question');
+                    }
+                }
+
+                //选择种类下拉框选中
+                function changeEntClass(ev,i) {
+                    select_type = [];
+                    var Entity_data = select_data.Entity_data;
+                    for (var j = 0, len = Entity_data.length; j < len; j++) {
+                        if (Entity_data[j].dev_class_id == i) {
+                            select_type.push(Entity_data[j]);
+                        }
+                    }
+                }
+                /*事件绑定
+                 * 2019年11月1日 21:26:36 更新
+                 * */
+                //监听事件，搜索设备种类下拉框选中
+                search_class_select.on('change', function (ev) {
+                    search_entity_select.setSelectedValue( '');//初始化型号
+                    if(!$.isEmptyObject(search_class_select.getSelectedValue())){
+                        changeEntClass(ev,search_class_select.getSelectedValue());
+                        search_entity_select.set('items', select_type);
+                    }
+                });
+
+                //监听事件，搜索设备类别下拉框选中
+                search_type_select.on('change', function (ev) {
+                    select_data = [];//初始化
+                    search_class_select.setSelectedValue('');//初始化种类
+                    search_entity_select.setSelectedValue('');//初始化型号
+                    search_office_select.setSelectedValue('');//初始化科室
+                    entity_selectAjax(ev.item.name,ev.item.value);
+                });
+
+                //监听事件，搜索设备类别下拉框选中
+                search_type_select.on('click', function selectClick(ev) {
+                    ev.item = {
+                        name:search_type_select.get('items')[0].name,
+                        value:search_type_select.get('items')[0].value,
+                    };
+                    search_type_select.fire('change',ev);//触发change事件
+                    search_type_select.off('click',selectClick); //移除click事件
+
+                });
+
+                //监听事件，删除一条记录
+                grid.on('cellclick', function (ev) {
+                    var sender = $(ev.domTarget); //点击的Dom
+                    if (sender.hasClass('btn-del')) {
+                        var record = ev.record;
+                        delItems([record]);
+                    }
+                });
+
+                //监听事件，tab类别切换
+                tab_I.on('selectedchange', function (ev) {
+                    I_Reset();
+                    select_data = [];
+                    entity_selectAjax(tab_I.getSelected().__attrVals.name,tab_I.getSelected().__attrVals.value);
+                    I_Form.getField('stock_type').set('value', tab_I.getSelected().__attrVals.value);
+                });
+
+                //监听事件，选择设备种类下拉框选中
+                dev_name_select.on('change', function (ev) {
+                    dev_type_select.setSelectedValue( '');//初始化型号
+                    changeEntClass(ev,dev_name_select.getSelectedValue());
+                    dev_type_select.set('items', select_type);
+                });
+
+                //监听事件，选择设备型号下拉框选中
+                dev_type_select.on('change', function (ev) {
+                    stock_office_select.setSelectedValue( '');//初始化入库科室！！
+                });
+
+                //监听事件,提示框显示
+                search_grid_tip.on('show', function (ev) {
+                    var innerText = ev.target.__attrVals.curTrigger.context.innerText;
+                    search_grid_tip.set('title', innerText);
+                });
+
+                //监听事件，选择科室下拉框选中
+                stock_office_select.on('change', function (ev) {
+                    input_console(true);
+                    var edv = Editing_I.get('editor').getValue();
+                    if (edv.entity_id != null && edv.entity_id != '' && edv.entity_id != undefined) {
+                        $.ajax({
+                            url: '/listStockByEntityId',
+                            data: {
+                                entity_id: edv.entity_id,
+                                office_id: edv.stock_office_id
+                            },
+                            type: 'POST', //GET
+                            async: true,    //或false,是否异步
+                            /*timeout: 5000,*/    //超时时间(如果后台数据加载缓慢，设置超时时间会导致在时间超时后自动执行success函数而后台还没有返回data数据)
+                            dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+                            success: function (data, textStatus, jqXHR) {
+                                if (!$.isEmptyObject(data.entityData)) {
+                                    Sto_rec_grid.set('items', data.entityData);
+                                    // input_console(false);
+                                } else {
+                                    Sto_rec_grid.set('items', []);
+                                    input_console(false);
+                                }
+                                $("#unit_num").val(1);
+                            },
+                            error: function (xhr, textStatus) {
+                                console.log('错误')
+                                console.log(xhr)
+                                console.log(textStatus)
+                            }
+                        })
+                    }//if语句判断是否获取到设备ID
+                });
+
+                //库存记录框选中
+                stock_record_select.on('change', function (ev) {
+                    $("#in_confirmed_no").attr('disabled', false);
+                    $("#in_confirmed_date").attr('disabled', false);
+                    $("#stock_version").val(ev.item.stock_version);
+                    $("#stock_unit").val(ev.item.stock_unit);
+                    $("#stock_proportion").val(ev.item.stock_proportion);
+                    $("#stock_total").val(ev.item.stock_total);
+                });
+
+                //重置按钮
+                $("#I_Reset").click(function () {
+                    I_Reset();
+                    /*   I_Form.getField('reset').on('click', function (ev) {
+
+                     });
+                     I_Form.getField('stock_proportion').on('change', function (ev) { //根据比例调整数量
+                     alert(I_Form.getField('stock_proportion').get('value'));
+                     });*/
+                });
+                //个体/单位比例输入框光标移出事件
+                $("#stock_proportion").on('blur', function (ev) {
+                    var I_num = $("#in_confirmed_no").val();//获取入库数量no
+                    var stock_proportion = $("#stock_proportion").val();//获取库存比例proportion
+                    var I_stock_total=0;//初始化入库总量值
+                    if (stock_proportion != null && stock_proportion != '' && stock_proportion != undefined) {
+                        if (I_num != null && I_num != '' && I_num != undefined) {
+                            //改变入库数量
+                            I_num = calculate_amount(I_num, stock_proportion);//生成新的入库数量
+                            I_Form.getField('in_confirmed_no').set('value', I_num);//重设入库数量值
+                            //改变总量
+                            I_stock_total=reckon_stock_total(I_num, stock_proportion);//生成入库总量
+                            I_Form.getField('in_confirmed_total').set('value', I_stock_total);
+                            I_num=stock_record_select.get('picker').get('children')[0].getCount( );//获取Sto_rec_grid选项数量
+                            if (I_num >0) {
+                                I_num=stock_record_select.get('picker').get('children')[0].getSelected().stock_total;//获取选择的库存记录总量（此时I_num已赋值为记录总量）
+                            }
+                            I_stock_total=I_stock_total+parseInt(I_num);//记录总量+新输入的库存总量=新的库存总量（此时I_stock_total已赋值为新库存总量）
+                            $("#stock_total").val(parseFloat(I_stock_total));//重设库存总量值
+                            //改变总数量no
+                            $("#stock_no").val(makeInNum(I_stock_total,stock_proportion));//重设库存总数量值
+                        }
+                    }
+                });
+
+                //入库数量输入框光标移入事件
+                $("#in_confirmed_no").on('focus', function () {
+                    $("#in_confirmed_total").val();
+                    $("#stock_total").val(0);
+                });
+
+                //入库数量输入框光标移出事件
+                $("#in_confirmed_no").on('blur', function () {
+                    $("#stock_proportion").trigger('blur');
+                });
+
+                //出库数量输入框光标移出事件
+                $("#out_confirmed_no").on('blur', function () {
+                    var O_num = $("#out_confirmed_no").val();//获取入库数量no
+                    var proportion = parseInt(grid.getSelection()[0].stock_proportion);
+                    var out_stock_total=reckon_stock_total(O_num,proportion);
+                    $("#out_confirmed_total").val(out_stock_total);
+                    O_num=grid.getSelection()[0].stock_total-out_stock_total;
+                    O_Form.getField('stock_total').set('value',O_num);
+                    O_Form.getField('stock_no').set('value',makeInNum(O_num,proportion));
+                });
+
+                stock_office_tree.on('itemclick', function (ev) {
+                    O_Form.getField('out_confirmed_officeId').set('value', ev.item.value);
+                });
+
+            });
+</script>
+
+</body>
+</html>

@@ -44,10 +44,10 @@ public class DeviceClassServiceImpl implements DeviceClassService {
         return dao.listMaterialOfTab(tab);
     }
 
-    @Override
+   /* @Override
     public boolean addDeviceClass(DeviceClass deviceClass) {
         return dao.addDeviceClass(deviceClass)==1?true:false;
-    }
+    }*/
 
     /*@Override
     public DeviceClass getDeviceClassById(String id) {
@@ -82,7 +82,7 @@ public class DeviceClassServiceImpl implements DeviceClassService {
             entityClass.setUpdateUserId("admin");
             entityClass.setUpdateDate(Date);
             entityClass.setDeleteFlag("0");
-            Boolean resultBl = addDeviceClass(entityClass);
+            Boolean resultBl = dao.addDeviceClass(entityClass)==1?true:false;
             if (!(resultBl)) {
                 return null;
             }

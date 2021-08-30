@@ -7,7 +7,6 @@
     <resultMap id="deviceSelectMap" type="java.util.HashMap">
         <id column="dev_class_id" property="dev_class_id" jdbcType="VARCHAR"/>
         <result column="id" property="value" jdbcType="VARCHAR"/>
-        <result column="dev_name" property="dev_name" jdbcType="VARCHAR"/>
         <result column="dev_type" property="text" jdbcType="VARCHAR"/>
         <result column="single_unit" property="single_unit" jdbcType="VARCHAR"/>
     </resultMap>
@@ -25,7 +24,7 @@
     </resultMap>
 
     <!--获取分页 -->
-    <select id="listDevice" resultType="com.xxk.management.device.entity.Device">
+    <select id="listDevice" parameterType="string" resultType="com.xxk.management.device.entity.Device">
         select
         <include refid="columns"></include>
         from xxk_device where deleteFlag='0' ORDER BY createDate desc limit #{0},#{1};
@@ -68,7 +67,7 @@
     </insert>
 
     <select id="getDeviceSelect" resultMap="deviceSelectMap">
-        select dev_class_id,id,dev_name,dev_type,single_unit
+        select dev_class_id,id,dev_type,single_unit
         from xxk_device where deleteFlag='0';
     </select>
 

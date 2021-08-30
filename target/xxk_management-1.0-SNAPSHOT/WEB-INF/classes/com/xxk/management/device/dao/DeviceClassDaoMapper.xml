@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xxk.management.device.dao.DeviceClassDao">
-    <sql id="columns">id,ent_class,class_ident,class_tab,dev_max,mat_max,class_version,
+    <sql id="columns">id,ent_class,class_tab,dev_max,mat_max,class_version,
        createUserId,createDate,updateUserId,updateDate,deleteFlag</sql>
 
     <resultMap id="deviceClassMap" type="java.util.HashMap">
@@ -21,7 +21,7 @@
     </resultMap>
 
     <!--获取分页 -->
-    <select id="listDeviceClass" resultType="com.xxk.management.device.entity.DeviceClass">
+    <select id="listDeviceClass" parameterType="string" resultType="com.xxk.management.device.entity.DeviceClass">
         select
         <include refid="columns"></include>
         from xxk_dev_class where deleteFlag='0' ORDER BY createDate desc limit #{0},#{1};
@@ -44,7 +44,7 @@
 
     <insert id="addDeviceClass" parameterType="com.xxk.management.device.entity.DeviceClass">
         insert into xxk_dev_class(<include refid="columns"></include>) values(
-        #{id},#{ent_class},#{class_ident},#{class_tab},#{dev_max},#{mat_max},1,
+        #{id},#{ent_class},#{class_tab},#{dev_max},#{mat_max},1,
         #{createUserId},#{createDate},#{updateUserId},#{updateDate},#{deleteFlag});
     </insert>
 
@@ -75,6 +75,11 @@
     <update id="updateMat_maxMax" parameterType="com.xxk.management.device.entity.DeviceClass">
         update xxk_dev_class set mat_max=mat_max+1,updateUserId=#{updateUserId},updateDate=#{updateDate},class_version=#{class_version}+1
         where id=#{id} and class_version=#{class_version} and deleteFlag='0';
+    </update>
+
+    <update id="updateDeviceMax" parameterType="int">
+        update xxk_dev_class set dev_max=#{0},type_max=#{1},
+        updateUserId=#{updateUserId},updateDate=#{updateDate} where id=#{id} and deleteFlag='0';
     </update>
 
     <!--批量修改（批量逻辑删除） -->

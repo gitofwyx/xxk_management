@@ -1,0 +1,478 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> 耗材\配件表单</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="/css/dpl-min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/bui-min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/page-min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/suggest-style.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+        code {
+            padding: 0px 4px;
+            color: #d14;
+            background-color: #f7f7f9;
+            border: 1px solid #e1e1e8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <form id="searchForm" class="form-horizontal span32" autocomplete="off">
+            <input type="hidden">
+            <div class="row">
+                <div class="control-group span7">
+                    <label class="control-label">设备名称：</label>
+                    <div class="controls">
+                        <input type="text" class="control-text" name="dev_name">
+                    </div>
+                </div>
+                <div class="control-group span7">
+                    <label class="control-label">设备编号：</label>
+                    <div class="controls">
+                        <input type="text" class="control-text" name="dev_type">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span9">
+                    <label class="control-label">登记时间：</label>
+                    <div class="controls">
+                        <input type="text" class=" calendar" name="startDate"><span> - </span>
+                        <input name="endDate" type="text" class=" calendar">
+                    </div>
+                </div>
+                <div class="span3 offset2">
+                    <button type="button" id="btnSearch" class="button button-primary">搜索</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="search-grid-container">
+        <div id="grid"></div>
+    </div>
+
+</div>
+<div id="content" class="hide">
+    <form id="M_Form" method="post" class="form-horizontal" action="" autocomplete="off">
+        <!-- <input type="hidden" name="mat_name" id="mat_name">-->
+        <input type="hidden" name="dev_class_id" id="dev_class_id">
+        <input type="hidden" name="class_ident" id="class_ident">
+        <input type="hidden" name="mat_max" id="mat_max">
+        <input type="hidden" name="genre_tags" id="genre_tags" value="1">
+        <input type="hidden" name="class_version" id="class_version">
+        <input type="hidden" name="updateDate" id="updateDate">
+        <div id="tab"></div>
+        <hr style="margin-top:0.3px;height:1px;border:none;border-top:1px solid #b9b9b9;">
+        <div id="panel" class="device_group">
+            <div class="row matP_class" id="matP_row" data-id="1"> <!--tabID-->
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>配件名称：</label>
+                    <div class="controls">
+                        <div class="input-group">
+                            <input type="text" class="suggest-input" id="matP_name" name="mat_name">
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                            </ul>
+                            <!-- /btn-group -->
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>配件型号：</label>
+                    <div class="controls">
+                        <input id="matP_mat_type" name="mat_type" type="text" data-rules="{required:true}"
+                               class="input-normal control-text">
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="matH_row">
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>耗材名称：</label>
+                    <div class="controls">
+                        <div class="input-group">
+                            <input type="text" class="suggest-input" id="matH_name" name="mat_name">
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                            </ul>
+                            <!-- /btn-group -->
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>耗材型号：</label>
+                    <div class="controls">
+                        <input id="matH_mat_type" name="mat_type" type="text" data-rules="{required:true}"
+                               class="input-normal control-text">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="control-group span8">
+                <label class="control-label"><s>*</s>计量(个体)单位：</label>
+                <div class="controls">
+                    <input name="single_unit" type="text" data-rules="{required:true}"
+                           class="input-normal control-text">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="control-group span15">
+                <label class="control-label">备注：</label>
+                <div class="controls control-row3">
+                    <textarea name="remark" class="input-large" type="text"></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="/js/bui-min.js"></script>
+<script type="text/javascript" src="/js/config-min.js"></script>
+<script type="text/javascript" src="/js/suggest/bootstrap-suggest.js"></script>
+<script type="text/javascript" src="/js/suggest/dropdown.js"></script>
+<script type="text/javascript">
+    function initTest() {
+    }
+    initTest();
+    BUI.use('common/page');
+</script>
+<script type="text/javascript">
+    BUI.use(['common/search', 'bui/tab', 'bui/form', 'bui/select', 'bui/picker', 'bui/grid'], function (Search, Tab, Form, Select, Picker, Grid) {
+        var enumObj_mat_flag = {"1": "启用", "0": "禁用"},
+                enumObj_genre_tags = {"2": "配件", "3": "耗材"},
+                mat_name_data = [],
+                mat_count_map = {},//material种类id对应的mat_name_data键
+                class_count = 0,//material种类最大值
+                class_ident = [],//material编号list
+                class_Date = {},//material更改时间map
+                FNames = {},//tab
+                items={},
+        /*form = new Form.HForm({
+         srcNode: '#J_Form'
+         }),*/
+                editing = new BUI.Grid.Plugins.DialogEditing({
+                    contentId: 'content', //设置隐藏的Dialog内容
+                    autoSave: true, //添加数据或者修改数据时，自动保存
+                    triggerCls: 'btn-edit',
+                }),
+                tab = new Tab.TabPanel({
+                    render: '#tab',
+                    elCls: 'nav-tabs',
+                    panelContainer: '#panel',//如果内部有容器，那么会跟标签项一一对应，如果没有会自动生成
+                    //selectedEvent : 'mouseenter',//默认为click,可以更改事件
+                    children: [
+                        {id: 'matP_row', title: '配件', value: '2', selected: true},
+                        {id: 'matH_row', title: '耗材', value: '3',},
+                    ]
+                }).render(),
+                /*suggest_P = new Select.Suggest({
+                    //id: 'matP_name',
+                    //render: '#matP_name_div',
+                    name: 'mat_name',
+                    valueField: '#dev_class_id',
+                    data: []
+                }).render(),
+                suggest_H = new Select.Suggest({
+                    id: 'matH_name',
+                    render: '#matH_name_div',
+                    name: 'mat_name',
+                    valueField: '#dev_class_id',
+                    data: []
+                }).render(),*/
+                columns = [
+                    {title: '&nbsp耗材&#92;配件编号', dataIndex: 'mat_ident', elCls: 'center', width: 150, align: 'center'},
+                    {title: '&nbsp耗材&#92;配件名称', dataIndex: 'mat_name', elCls: 'center', width: 150, align: 'center'},
+                    {title: '&nbsp耗材&#92;配件型号', dataIndex: 'mat_type', elCls: 'center', width: 150},
+                    {title: '&nbsp单位', dataIndex: 'single_unit', elCls: 'center', width: 70},
+                    {
+                        title: '&nbsp类型',
+                        dataIndex: 'genre_tags',
+                        elCls: 'center',
+                        width: 100,
+                        renderer: BUI.Grid.Format.enumRenderer(enumObj_genre_tags)
+                    },
+                    {
+                        title: '&nbsp状态',
+                        dataIndex: 'mat_flag',
+                        elCls: 'center',
+                        width: 70,
+                        renderer: BUI.Grid.Format.enumRenderer(enumObj_mat_flag)
+                    },
+                    {title: '&nbsp备注', dataIndex: 'remark', elCls: 'center', width: 250},
+                    {
+                        title: '操作', dataIndex: '', width: 100, renderer: function (value, obj) {
+                        var editStr1 = '<span class="grid-command btn-edit" title="编辑设备信息">编辑</span>',
+                                delStr = '<span class="grid-command btn-del" title="删除设备信息">删除</span>';//页面操作不需要使用Search.createLink
+                        return editStr1 + delStr;
+                    }
+                    }
+                ],
+                store = Search.createStore('/listMaterial', {
+                    proxy: {
+                        save: { //也可以是一个字符串，那么增删改，都会往那么路径提交数据，同时附加参数saveType
+                            addUrl: '/addMaterial',
+                            updateUrl: '/updateRegUser',
+                            removeUrl: '/delRegUserOfLogic'
+                        },
+                        method: 'POST'
+                    },
+                    pageSize: 12,
+                    autoSync: true //保存数据后，自动更新
+                }),
+                gridCfg = Search.createGridCfg(columns, {
+                    tbar: {
+                        items: [
+                            {
+                                text: '<i class="icon-pencil"></i>耗材&#92;配件登记',
+                                btnCls: 'button button-small',
+                                handler: addFunction
+                            },
+                            {
+                                text: '<i class="icon-edit"></i>更改信息',
+                                btnCls: 'button button-small',
+                                handler: updateFunction
+                            },
+                            {text: '<i class="icon-remove"></i>删除', btnCls: 'button button-small', handler: delFunction}
+                        ]
+                    },
+                    emptyDataTpl: '<div class="centered"><img alt="Crying" src="http://img03.taobaocdn.com/tps/i3/T1amCdXhXqXXXXXXXX-60-67.png"><h2>未获得到数据</h2></div>',
+                    plugins: [editing, BUI.Grid.Plugins.CheckSelection, BUI.Grid.Plugins.AutoFit] // 插件形式引入多选表格
+                });
+        var search = new Search({
+                    store: store,
+                    gridCfg: gridCfg
+                }),
+                grid = search.get('grid'),
+                M_Form = editing.get('form');
+        /*
+         *  method
+         * 更新时间 2019年11月17日 23:41:10
+         * */
+        function setClass_ident() {
+            if (mat_name_data != undefined || mat_name_data != null) {
+                var dev_class_id = M_Form.getField('dev_class_id').get("value");
+                var c = mat_count_map[dev_class_id];
+                M_Form.getField('class_ident').set('value', mat_name_data[c].class_ident);
+                M_Form.getField('mat_max').set('value', mat_name_data[c].mat_max);
+            }
+        };
+        //stop
+        function mat_selecteAjax() {
+            if ($.isEmptyObject(mat_name_data)) {
+                $.ajax({
+                    url: '/getMaterialName',
+                    data: {tab: tab.getSelected().__attrVals.value},
+                    type: 'POST', //GET
+                    async: true,    //或false,是否异步
+                    /*timeout: 5000,*/    //超时时间(如果后台数据加载缓慢，设置超时时间会导致在时间超时后自动执行success函数而后台还没有返回data数据)
+                    dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+                    success: function (data, textStatus, jqXHR) {
+                        if (data != null && data != undefined) {
+                            mat_name_data = data;
+                            if (!$.isEmptyObject(mat_name_data)) {
+                                //initDev_classSu(mat_name_data);
+                                /*suggest_P.setInternal('data', mat_name_data);
+                                 suggest_P.render();
+                                 suggest_H.setInternal('data', mat_name_data);
+                                 suggest_H.render();*/
+                                //alert(JSON.stringify(mat_name_data));//json对象转字符串
+                                for (var c in mat_name_data) {
+                                    class_ident.push(mat_name_data[c].class_ident);
+                                    class_Date[mat_name_data[c].class_ident] = mat_name_data[c].updateDate;
+                                    mat_count_map[mat_name_data[c].value] = c;
+                                }
+                                class_count = Math.max.apply(null, class_ident);//获取数组中的最大值
+                                M_Form.getField('dev_class_count').set('value', class_count);
+                            }
+                        }
+                    },
+                    error: function (xhr, textStatus) {
+                        console.log('错误');
+                        console.log(xhr);
+                        console.log(textStatus);
+                    }
+                })
+            }
+        };
+
+        function initBsSuggest(cla, v) {
+            if(!$.isEmptyObject(items) && items != undefined && items != null){
+                return;
+            }
+            items = tab.getItems();
+            for (var i = items.length - 1; i >= 0; i--) {
+                $("#" + items[i].__attrVals.id + " input[class='suggest-input']").each(function () {
+                    bsSuggest($(this).attr('id'), items[i].__attrVals.value);
+                })
+            };
+            function bsSuggest(cla, v) {
+                $("#" + cla).bsSuggest('init', {
+                    url: "/getMaterialName?tab=" + v,
+                    data: mat_name_data,
+                    effectiveFields: ["text", "class_ident"],
+                    searchFields: ["text", "class_ident"],
+                    effectiveFieldsAlias: {text: "种类", class_ident: "编号"},
+                    listAlign: 'auto',
+                    showBtn: false,
+                    autoMinWidth: true,
+                    getDataMethod: 'firstByUrl',
+                    idField: "value",
+                    keyField: "text",
+                    clearable: true,
+                }).on('onDataRequestSuccess', function (e, result) {
+                    console.log('onDataRequestSuccess: ', result);
+                }).on('onUnsetSelectValue', function (e, result) {
+                    M_Form.getField('dev_class_id').set('value','');
+                    M_Form.getField('mat_max').set('value', 0);
+                }).on('onSetSelectValue', function (e, keyword, data) {
+                    console.log('onSetSelectValue: ', keyword, data);
+                    editing.get('editor');
+                    M_Form.getField('dev_class_id').set('value', keyword.id);
+                    M_Form.getField('class_ident').set('value', data.class_ident);
+                    M_Form.getField('mat_max').set('value', data.mat_max);
+                    M_Form.getField('class_version').set('value', data.class_version);
+                    M_Form.getField('updateDate').set('value', data.updateDate);
+                    //$("input[name='dev_class_id']").val(keyword.id);
+                });
+            }
+        };
+
+        //
+        function selectedChange(ev) {
+            //ev.__attrVals.panel.getElementsByTagName("input");
+            // M_Form.clearFields();
+            var Fields = [];
+            var items = tab.getItems();
+            if (!$.isEmptyObject(FNames) && FNames != undefined && FNames != null) {
+                for (var k in FNames) {  //通过定义一个局部变量FName遍历获取到了map中所有的key值
+                    Fields = M_Form.getFields(k);
+                    for (var i = Fields.length - 1; i >= 0; i--) {
+                        if (FNames[k] == Fields[i].get('id')) {
+                            Fields[i].enable();
+                        }
+                    }
+                }
+            }
+            FNames = {};
+            M_Form.getField('genre_tags').set('value', ev.__attrVals.value);//种类赋值，2配件3耗材
+            for (var i = items.length - 1; i >= 0; i--) {
+                if (items[i].__attrVals.panel.id != ev.__attrVals.id) {
+                    $("#" + items[i].__attrVals.panel.id + " input[type='text']").each(function () {
+                        FNames[$(this).attr('name')] = $(this).attr('id');
+                    })
+                }
+            }
+            /* if (ev.__attrVals.value == '1') {
+             $("#matH_row input[type='text']").each(function () {
+             FNames.push($(this).attr('name'));
+             })
+             }*/
+            for (var k in FNames) {  //通过定义一个局部变量FName遍历获取到了map中所有的key值
+                Fields = M_Form.getFields(k);
+                for (var i = Fields.length - 1; i >= 0; i--) {
+                    if (FNames[k] == Fields[i].get('id')) {
+                        Fields[i].disable();
+                    }
+                }
+            }
+            // Fields.clearErrors();
+        };
+        //新增操作
+        function addFunction() {
+            /* var store = new Data.Store({
+             url: 'data.php',  //\u8bbe\u7f6e\u52a0\u8f7d\u6570\u636e\u7684URL
+             autoLoad: true    //\u521b\u5efaStore\u65f6\u81ea\u52a8\u52a0\u8f7d\u6570\u636e
+             });*/
+            /*var items = [
+             {text: '选项1', value: 'a'},
+             {text: '选项2', value: 'b'},
+             {text: '选项3', value: 'c'}
+             ]*/
+            FNames = {};
+            //mat_selecteAjax();
+            initBsSuggest();
+            var newData = {}; //标志是新增加的记录
+            editing.add(newData, 'name'); //添加记录后，直接编辑
+            for (var i in  M_Form.getFields('mat_name')) {  //通过定义一个局部变量FName遍历获取到了map中所有的key值
+                M_Form.getFields('mat_name')[i].addRule('required', true);
+            }
+            M_Form.getField('class_ident').set('value', 0);
+            M_Form.getField('mat_max').set('value', 0);
+            M_Form.getField('class_version').set('value', 0);
+            if (!$.isEmptyObject(class_Date) && class_count != 0) {
+                M_Form.getField('dev_class_count').set('value', class_count);
+            }
+            selectedChange(tab.getSelected());
+        }
+
+        //编辑操作
+        function updateFunction() {
+            var selections = grid.getSelection();
+            if (selections.length == 0) {
+                return;
+            } else if (selections.length != 1) {
+                BUI.Message.Alert('一次只能编辑一条记录！！');
+                return;
+            } else {
+                var eData = selections[0];
+                editing.edit(eData);
+            }
+        }
+
+        //删除操作
+        function delFunction() {
+            var selections = grid.getSelection();
+            //items(selections);
+        }
+
+        function items(items) {
+            var ids = [];
+            BUI.each(items, function (item) {
+                ids.push(item.id);
+            });
+            if (ids.length) {
+                BUI.Message.Confirm('确认要删除选中的记录么？', function () {
+                    store.save('remove', {ids: ids});
+                }, 'question');
+            }
+        }
+
+        /*
+         * 监听事件绑定
+         * 更新时间 2019年11月12日 21:47:46
+         * */
+        // 删除一条记录
+        grid.on('cellclick', function (ev) {
+            var sender = $(ev.domTarget); //点击的Dom
+            if (sender.hasClass('btn-del')) {
+                var record = ev.record;
+                items([record]);
+            }
+        });
+        grid.on('itemsshow', function (ev) {
+            var iName = 0;
+            $("#M_Form input[type='text']").each(function () {
+                if ($(this).attr('id') == undefined || $(this).attr('id') == null || $(this).attr('id') == '') {
+                    $(this).attr('id', $(this).attr('name') + iName++);
+                }
+            })
+        });
+        tab.on('selectedchange', function (ev) {
+            //M_Form.clearFields();
+            mat_name_data = [];
+            selectedChange(tab.getSelected());
+        });
+        editing.on('accept', function (ev) {
+            //alert(M_Form.getField( 'dev_class_id').get('value'));
+            mat_name_data = [];
+        });
+    });
+
+</script>
+
+</body>
+</html>

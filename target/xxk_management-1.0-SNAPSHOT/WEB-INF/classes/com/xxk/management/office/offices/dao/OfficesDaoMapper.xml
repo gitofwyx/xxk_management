@@ -14,7 +14,7 @@
     </resultMap>
 
     <!--获取分页 -->
-    <select id="listOffices" resultType="com.xxk.management.office.offices.entity.Offices">
+    <select id="listOffices" parameterType="string" resultType="com.xxk.management.office.offices.entity.Offices">
         select
         <include refid="columns"></include>
         from xxk_offices where deleteFlag='0' ORDER BY createDate desc limit #{0},#{1};
