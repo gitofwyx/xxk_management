@@ -9,45 +9,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96781760-f708-4b19-b4f7-7da62f6fd708" name="Default" comment="2021年8月4日 23:59:49 排错">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/system/controller/SysadminController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/system/dao/SysadminDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/system/dao/SysadminDaoMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/system/service/SysadminService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/system/service/impl/SysadminServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/bui/sysadmin/device_admin.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/bui/sysadmin/material_admin.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/bui/sysadmin/offices_admin.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/bui/sysadmin/stock_admin.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/bui/sysadmin/user_admin.html" afterDir="false" />
+    <list default="true" id="96781760-f708-4b19-b4f7-7da62f6fd708" name="Default" comment="2021年8月31日 00:48:27 整合管理员功能">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/device/dao/DeviceClassDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/device/dao/DeviceClassDaoMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/device/dao/DeviceDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/device/dao/DeviceDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/device/service/DeviceClassService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/device/service/DeviceClassService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/device/service/impl/DeviceClassServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/device/service/impl/DeviceClassServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/material/dao/materialDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/material/dao/MaterialDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/office/offices/dao/OfficesDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/office/offices/dao/OfficesDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/office/offices/record/dao/RecordDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/office/offices/record/dao/RecordDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/office/offices/record/service/RecordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/office/offices/record/service/RecordService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/system/web/KelanRealm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/system/web/KelanRealm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/bui/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/bui/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xxk/management/device/dao/DeviceClassDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xxk/management/device/dao/DeviceClassDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xxk/management/device/dao/DeviceDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xxk/management/device/dao/DeviceDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xxk/management/device/service/DeviceClassService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xxk/management/device/service/DeviceClassService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xxk/management/device/service/impl/DeviceClassServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xxk/management/device/service/impl/DeviceClassServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xxk/management/material/dao/materialDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xxk/management/material/dao/materialDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xxk/management/office/offices/dao/OfficesDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xxk/management/office/offices/dao/OfficesDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xxk/management/office/offices/record/dao/RecordDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xxk/management/office/offices/record/dao/RecordDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xxk/management/system/web/KelanRealm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/bui/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/bui/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/device/dao/DeviceClassDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/device/dao/DeviceClassDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/device/dao/DeviceDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/device/dao/DeviceDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/device/service/DeviceClassService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/device/service/DeviceClassService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/device/service/impl/DeviceClassServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/device/service/impl/DeviceClassServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/material/dao/materialDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/material/dao/materialDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/office/offices/dao/OfficesDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/office/offices/dao/OfficesDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/office/offices/record/dao/RecordDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/office/offices/record/dao/RecordDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/device/entity/Device.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/device/entity/Device.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xxk/management/device/entity/Device.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xxk/management/device/entity/Device.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/system/web/KelanRealm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/system/web/KelanRealm.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xxk_management.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/xxk_management.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xxk_management.pdm" beforeDir="false" afterPath="$PROJECT_DIR$/xxk_management.pdm" afterDir="false" />
     </list>
@@ -2138,13 +2105,8 @@
       <workItem from="1628093699216" duration="357000" />
       <workItem from="1630338243627" duration="3201000" />
       <workItem from="1630341595933" duration="462000" />
-    </task>
-    <task id="LOCAL-00103" summary="2021年5月29日 14:45:38">
-      <created>1622270742790</created>
-      <option name="number" value="00103" />
-      <option name="presentableId" value="LOCAL-00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1622270742790</updated>
+      <workItem from="1630342087926" duration="2878000" />
+      <workItem from="1630344982027" duration="336000" />
     </task>
     <task id="LOCAL-00104" summary="2021年5月29日 17:50:53">
       <created>1622281858510</created>
@@ -2482,7 +2444,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628092808697</updated>
     </task>
-    <option name="localTasksCounter" value="152" />
+    <task id="LOCAL-00152" summary="2021年8月31日 00:48:27 整合管理员功能">
+      <created>1630342157097</created>
+      <option name="number" value="00152" />
+      <option name="presentableId" value="LOCAL-00152" />
+      <option name="project" value="LOCAL" />
+      <updated>1630342157098</updated>
+    </task>
+    <option name="localTasksCounter" value="153" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -2589,7 +2558,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="2021年6月13日 23:49:18" />
     <MESSAGE value="2021年6月16日 22:09:58" />
     <MESSAGE value="2021年6月18日 00:17:34" />
     <MESSAGE value="2021年6月19日 01:20:40" />
@@ -2614,7 +2582,8 @@
     <MESSAGE value="2021年7月31日 04:10:42 转移入库" />
     <MESSAGE value="2021年7月31日 07:50:00 新增字段stock表stock_idle_total" />
     <MESSAGE value="2021年8月4日 23:59:49 排错" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021年8月4日 23:59:49 排错" />
+    <MESSAGE value="2021年8月31日 00:48:27 整合管理员功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021年8月31日 00:48:27 整合管理员功能" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2722,6 +2691,7 @@
         <watch expression="result.get(&quot;hasError&quot;) instanceof Boolean" language="JAVA" />
         <watch expression="result.get(&quot;hasError&quot;).getClass().getSimpleName()" language="JAVA" />
         <watch expression="result.get(&quot;hasError&quot;)==true" language="JAVA" />
+        <watch expression="sysadmin" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
