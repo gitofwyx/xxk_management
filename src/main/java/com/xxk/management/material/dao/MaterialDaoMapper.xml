@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xxk.management.material.dao.MaterialDao">
-    <sql id="columns">id,dev_class_id,mat_name,mat_ident,mat_type,mat_type_ident,single_unit,genre_tags,mat_flag,
+    <sql id="columns">id,dev_class_id,mat_name,mat_ident,mat_brand,mat_type,mat_type_ident,mat_specs,genre_tags,single_unit,mat_flag,
                 isStock,stock_office,remark,keyWord,createUserId,createDate,updateUserId,updateDate,deleteFlag</sql>
 
     <resultMap id="materialSelectMap" type="java.util.HashMap">
@@ -56,8 +56,8 @@
     <!--添加信息 -->
     <insert id="addMaterial" parameterType="com.xxk.management.material.entity.Material">
         insert into xxk_material(<include refid="columns"></include>) values(
-        #{id},#{dev_class_id},#{mat_name},#{mat_ident},#{mat_type},#{mat_type_ident},#{single_unit},
-        #{genre_tags},#{mat_flag},#{isStock},#{stock_office},#{remark},#{keyWord},#{createUserId},
+        #{id},#{dev_class_id},#{mat_name},#{mat_ident},#{mat_brand},#{mat_type},#{mat_type_ident},#{mat_specs},#{genre_tags},
+        #{single_unit},#{mat_flag},#{isStock},#{stock_office},#{remark},#{keyWord},#{createUserId},
         #{createDate},#{updateUserId},#{updateDate},#{deleteFlag});
     </insert>
 

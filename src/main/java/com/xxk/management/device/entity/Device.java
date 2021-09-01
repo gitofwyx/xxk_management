@@ -14,6 +14,7 @@ public class Device extends BaseInfoEntity {
     private String dev_brand;      //设备品牌
     private String dev_type;    //设备型号
     private int dev_type_ident;    //型号编号
+    private String dev_specs;    //型号规格
     private String genre_tags;      //类型标识
     private String single_unit;     //个体单位
     private String dev_flag;         //设备状态 -> 1:停用；0：正常
@@ -78,6 +79,14 @@ public class Device extends BaseInfoEntity {
 
     public void setDev_type_ident(int dev_type_ident) {
         this.dev_type_ident = dev_type_ident;
+    }
+
+    public String getDev_specs() {
+        return dev_specs;
+    }
+
+    public void setDev_specs(String dev_specs) {
+        this.dev_specs = dev_specs;
     }
 
     public String getGenre_tags() {
