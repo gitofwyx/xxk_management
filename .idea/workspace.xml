@@ -9,16 +9,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96781760-f708-4b19-b4f7-7da62f6fd708" name="Default" comment="2021年8月31日 01:43:14 Device增加dev_brand字段">
+    <list default="true" id="96781760-f708-4b19-b4f7-7da62f6fd708" name="Default" comment="2021年9月2日 01:29:40 Device增加dev_specs(规格)字段">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/device/dao/DeviceDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/device/dao/DeviceDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/device/entity/Device.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/device/entity/Device.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/material/dao/MaterialDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/material/dao/MaterialDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xxk/management/material/entity/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xxk/management/material/entity/Material.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/bui/sysadmin/device_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/bui/sysadmin/device_admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xxk/management/device/dao/DeviceDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xxk/management/device/dao/DeviceDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/device/dao/DeviceDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/device/dao/DeviceDaoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/device/entity/Device.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xxk_management-1.0-SNAPSHOT/WEB-INF/classes/com/xxk/management/device/entity/Device.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xxk_management.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/xxk_management.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xxk_management.pdm" beforeDir="false" afterPath="$PROJECT_DIR$/xxk_management.pdm" afterDir="false" />
     </list>
@@ -2115,13 +2108,9 @@
       <workItem from="1630514912420" duration="650000" />
       <workItem from="1630515577405" duration="449000" />
       <workItem from="1630516042255" duration="1126000" />
-    </task>
-    <task id="LOCAL-00105" summary="2021年5月31日 01:04:54">
-      <created>1622394298213</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1622394298213</updated>
+      <workItem from="1630517182872" duration="1621000" />
+      <workItem from="1630584490719" duration="217000" />
+      <workItem from="1630903208687" duration="1732000" />
     </task>
     <task id="LOCAL-00106" summary="2021年5月31日 01:11:59">
       <created>1622394722816</created>
@@ -2459,7 +2448,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630345425038</updated>
     </task>
-    <option name="localTasksCounter" value="154" />
+    <task id="LOCAL-00154" summary="2021年9月2日 01:29:40 Device增加dev_specs(规格)字段">
+      <created>1630517407458</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1630517407458</updated>
+    </task>
+    <option name="localTasksCounter" value="155" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -2566,7 +2562,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="2021年6月18日 00:17:34" />
     <MESSAGE value="2021年6月19日 01:20:40" />
     <MESSAGE value="2021年6月19日 01:35:02" />
     <MESSAGE value="2021年6月30日 00:04:42" />
@@ -2591,7 +2586,8 @@
     <MESSAGE value="2021年8月4日 23:59:49 排错" />
     <MESSAGE value="2021年8月31日 00:48:27 整合管理员功能" />
     <MESSAGE value="2021年8月31日 01:43:14 Device增加dev_brand字段" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021年8月31日 01:43:14 Device增加dev_brand字段" />
+    <MESSAGE value="2021年9月2日 01:29:40 Device增加dev_specs(规格)字段" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021年9月2日 01:29:40 Device增加dev_specs(规格)字段" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
