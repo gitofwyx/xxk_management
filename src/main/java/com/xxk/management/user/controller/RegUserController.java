@@ -78,6 +78,7 @@ public class RegUserController extends BaseController {
         String createDate = DateUtil.getFullTime();
         String id = UUIdUtil.getUUID();
         try {
+            user.setRealName(user.getName());
             user.setName(PrivacyUtil.replaceNameX(user.getName()));
             user.setId(id);
             user.setPassword("123");

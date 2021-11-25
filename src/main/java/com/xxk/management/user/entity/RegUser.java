@@ -12,6 +12,7 @@ public class RegUser extends BaseInfoEntity {
     private String account;
     private String password;
     private String name;
+    private String realName;
     private String birth;
     private String sex;
     private String phone;
@@ -62,6 +63,14 @@ public class RegUser extends BaseInfoEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public String getBirth() {
