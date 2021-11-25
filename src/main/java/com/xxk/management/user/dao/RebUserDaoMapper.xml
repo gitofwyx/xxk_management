@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xxk.management.user.dao.RegUserDao">
-    <sql id="columns">id,roleId,account,password,name,birth,sex,phone,education,marriage,createUnit,QCellCore,
+    <sql id="columns">id,roleId,account,password,name,realName,birth,sex,phone,education,marriage,createUnit,QCellCore,
         address,keyWord,createUserId,createDate,updateUserId,updateDate,deleteFlag</sql>
 
     <resultMap id="BaseResultMap" type="java.util.HashMap">
@@ -57,7 +57,7 @@
     <!--添加用户信息 -->
     <insert id="addRegUser" parameterType="com.xxk.management.user.entity.RegUser">
         insert into xxk_reg_user(<include refid="columns"></include>) values(
-        #{id},#{roleId},#{account},#{password},#{name},#{birth},#{sex},#{phone},#{education},#{marriage},#{createUnit},
+        #{id},#{roleId},#{account},#{password},#{name},#{realName},#{birth},#{sex},#{phone},#{education},#{marriage},#{createUnit},
         #{QCellCore},#{address},#{keyWord},#{createUserId},#{createDate},#{updateUserId},#{updateDate},#{deleteFlag});
     </insert>
 

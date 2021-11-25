@@ -2,6 +2,7 @@ package com.xxk.management.user.controller;
 
 import com.xxk.core.file.BaseController;
 import com.xxk.core.util.DateUtil;
+import com.xxk.core.util.PrivacyUtil;
 import com.xxk.core.util.UUIdUtil;
 import com.xxk.management.roles.entity.Roles;
 import com.xxk.management.roles.service.RolesService;
@@ -77,6 +78,7 @@ public class RegUserController extends BaseController {
         String createDate = DateUtil.getFullTime();
         String id = UUIdUtil.getUUID();
         try {
+            user.setName(PrivacyUtil.replaceNameX(user.getName()));
             user.setId(id);
             user.setPassword("123");
             user.setCreateDate(createDate);
