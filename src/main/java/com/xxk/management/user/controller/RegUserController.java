@@ -172,15 +172,14 @@ public class RegUserController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/addRoles", method = RequestMethod.POST) // 添加角色信息
-    public Map<String, String> addRoles(HttpServletRequest request) {
+    @RequestMapping(value = "/addRoles", method = RequestMethod.GET) // 添加角色信息
+    public Map<String, String> addRoles(@RequestParam(value = "roleVal") String roleVal) {
         // Subject currentUser = SecurityUtils.getSubject();
         Map<String, String> result = new HashMap<>();
         Roles role = new Roles();
         String createDate = DateUtil.getFullTime();
         String id = UUIdUtil.getUUID();
         try {
-            String roleVal = "admin";
             role.setId(id);
             role.setRoleVal(roleVal);
             role.setDeleteFlag("0");
