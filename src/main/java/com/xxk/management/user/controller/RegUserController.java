@@ -73,8 +73,8 @@ public class RegUserController extends BaseController {
 
     @ResponseBody
     @RequestMapping("/addRegUser")
-    public Map<String, Boolean> addRegUser(RegUser user) {
-        Map<String, Boolean> result = new HashMap<>();
+    public Map<String, Object> addRegUser(RegUser user) {
+        Map<String, Object> result = new HashMap<>();
         String createDate = DateUtil.getFullTime();
         String id = UUIdUtil.getUUID();
         try {
@@ -90,13 +90,14 @@ public class RegUserController extends BaseController {
 
             boolean Result = rebUserService.addRegUser(user);
             if (!(Result)) {
-                result.put("error", false);
+                result.put("hasError", true);
+                result.put("error", "添加失败！0");
             } else {
                 result.put("success", true);
             }
         } catch (Exception e) {
-            result.put("error", false);
-            log.info(e);
+            result.put("hasError", true);
+            result.put("error", e.getLocalizedMessage());
         }
         return result;
         //return "system/index";
@@ -121,8 +122,8 @@ public class RegUserController extends BaseController {
             result.put("Object", user);
             result.put("success", true);
         } catch (Exception e) {
-            log.error(e);
-            result.put("error", false);
+            result.put("hasError", true);
+            result.put("error", e.getLocalizedMessage());
         }
         return result;
     }
@@ -130,8 +131,8 @@ public class RegUserController extends BaseController {
 
     @ResponseBody
     @RequestMapping("/updateRegUser")
-    public Map<String, Boolean> updateRegUser(RegUser user) {
-        Map<String, Boolean> result = new HashMap<>();
+    public Map<String, Object> updateRegUser(RegUser user) {
+        Map<String, Object> result = new HashMap<>();
         //String phone=(String)request.getAttribute("phone");
         //String phone = request.getParameter("phone");
         String updateDate = DateUtil.getFullTime();
@@ -146,7 +147,8 @@ public class RegUserController extends BaseController {
             result.put("success", true);
         } catch (Exception e) {
             log.error(e);
-            result.put("error", false);
+            result.put("hasError", true);
+            result.put("error", e.getLocalizedMessage());
         } finally {
             return result;
         }
@@ -154,8 +156,8 @@ public class RegUserController extends BaseController {
 
     @ResponseBody
     @RequestMapping("/delRegUserOfLogic")
-    public Map<String, Boolean> delRegUserOfLogic(@RequestParam("ids[]") List<String> ids) {
-        Map<String, Boolean> result = new HashMap<>();
+    public Map<String, Object> delRegUserOfLogic(@RequestParam("ids[]") List<String> ids) {
+        Map<String, Object> result = new HashMap<>();
         try {
             if (rebUserService.deleteListRegUser(ids) == false) {
                 log.error("删除出错");
@@ -165,7 +167,8 @@ public class RegUserController extends BaseController {
             result.put("success", true);
         } catch (Exception e) {
             log.error(e);
-            result.put("error", false);
+            result.put("hasError", true);
+            result.put("error", e.getLocalizedMessage());
         } finally {
             return result;
         }
@@ -173,9 +176,9 @@ public class RegUserController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/addRoles", method = RequestMethod.GET) // 添加角色信息
-    public Map<String, String> addRoles(@RequestParam(value = "roleVal") String roleVal) {
+    public Map<String, Object> addRoles(@RequestParam(value = "roleVal") String roleVal) {
         // Subject currentUser = SecurityUtils.getSubject();
-        Map<String, String> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
         Roles role = new Roles();
         String createDate = DateUtil.getFullTime();
         String id = UUIdUtil.getUUID();
@@ -199,8 +202,8 @@ public class RegUserController extends BaseController {
         catch (Exception e) {
             System.out.println(e);
             log.error(">>>>添加角色失败");
-            result.put("isError", "1");
-            result.put("1", "添加角色失败");
+            result.put("hasError", true);
+            result.put("error", e.getLocalizedMessage());
             return result;
         }
         return result;
@@ -214,8 +217,8 @@ public class RegUserController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/addRegUserTest",method = RequestMethod.GET)
-    public Map<String, Boolean> addRegUserTest(RegUser user) {
-        Map<String, Boolean> result = new HashMap<>();
+    public Map<String, Object> addRegUserTest(RegUser user) {
+        Map<String, Object> result = new HashMap<>();
         String createDate = DateUtil.getFullTime();
         String id = UUIdUtil.getUUID();
         try {
@@ -229,12 +232,14 @@ public class RegUserController extends BaseController {
 
             boolean Result = rebUserService.addTest(user);
             if (!(Result)) {
-                result.put("error", false);
+                result.put("hasError", true);
+                result.put("error", "添加失败！0");
             } else {
                 result.put("success", true);
             }
         } catch (Exception e) {
-            result.put("error", false);
+            result.put("hasError", true);
+            result.put("error", e.getLocalizedMessage());
             log.info(e);
         }
         return result;
