@@ -16,6 +16,10 @@ public class Offices extends BaseInfoEntity {
     private String office_function;      //科室性质
     private String leading_official;      //科室负责人
     private String keyWord;
+    private String pinYin_code;
+    private String pinYinS_code;
+    private String wuBi_code;
+    private String wuBiS_code;
 
     @Override
     public String getId() {
@@ -89,5 +93,37 @@ public class Offices extends BaseInfoEntity {
 
     public void setKeyWord(String keyWord) {
         this.keyWord = keyWord;
+    }
+
+    public String getPinYin_code() {
+        return pinYin_code;
+    }
+
+    public void setPinYin_code(String pinYin_code) {
+        this.pinYin_code = pinYin_code;
+    }
+
+    public String getPinYinS_code() {
+        return pinYinS_code;
+    }
+
+    public void setPinYinS_code(String pinYinS_code) {
+        this.pinYinS_code = pinYinS_code;
+    }
+
+    public String getWuBi_code() {
+        return wuBi_code;
+    }
+
+    public void setWuBi_code(String wuBi_code) {
+        this.wuBi_code = wuBi_code;
+    }
+
+    public String getWuBiS_code() {
+        return wuBiS_code;
+    }
+
+    public void setWuBiS_code(String wuBiS_code) {
+        this.wuBiS_code = wuBiS_code;
     }
 }
