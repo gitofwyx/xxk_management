@@ -16,6 +16,8 @@ public interface OfficesDao {
 
     public int addOffices(Offices office);
 
+    public int updateOfficeCharToEn(List<Offices> offices);
+
     public List<Map<String, Object>> getOfficeSelect();
 
     public int getUnderlingCount(String belong_to_id);

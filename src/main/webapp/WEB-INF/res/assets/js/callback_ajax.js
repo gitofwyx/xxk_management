@@ -40,3 +40,28 @@ function CD_ajaxAllParam(url,v,async,callback){
         }
     })
 }
+
+//判断数据是否为Null或者undefined或者为空字符串
+function CheckIsNullOrEmpty(value) {
+    //正则表达式用于判斷字符串是否全部由空格或换行符组成
+    var reg = /^\s*$/
+    //返回值为true表示不是空字符串
+    return (value != null && value != undefined && !reg.test(value))
+}
+
+function result_handle(data) {
+    if (CheckIsNullOrEmpty(data)) {
+        if (data.hasError === true) {
+            return false;
+        }
+        if(typeof data=='string'){
+            if(data.indexOf("hasError")>=0){
+                return false;
+            }
+        }
+    } else {
+        return false;
+    }
+    return true;
+
+}

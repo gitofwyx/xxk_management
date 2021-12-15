@@ -2,6 +2,7 @@ package com.xxk.management.office.offices.controller;
 
 import com.xxk.core.file.BaseController;
 import com.xxk.core.util.DateUtil;
+import com.xxk.core.util.JsonUtils;
 import com.xxk.core.util.UUIdUtil;
 import com.xxk.management.office.offices.entity.Offices;
 import com.xxk.management.office.offices.service.OfficesService;
@@ -95,6 +96,35 @@ public class OfficesController extends BaseController {
         } catch (Exception e) {
             result.put("hasError", true);
             result.put("error", "添加出错");
+            log.error(e);
+        }
+        return result;
+        //return "system/index";
+    }
+
+    @ResponseBody
+    @RequestMapping("/officeCharToEn")
+    public Map<String, Object> officeCharToEn(@RequestParam(value = "offices") String offices) {
+        Map<String, Object> result = new HashMap<>();
+        String Date = DateUtil.getFullTime();
+
+        try {
+
+            List<Offices> officeList= JsonUtils.getObjectFromJsonArray(offices,Offices.class);
+            if(null==officeList||officeList.isEmpty()){
+                result.put("hasError", true);
+                result.put("error", "更新出错，数据为空");
+                return result;
+            }
+            Boolean resultBl = officesService.updateOfficeCharToEn(officeList);
+            if (!(resultBl)) {
+                result.put("hasError", true);
+                result.put("error", "更新出错，0条记录更新");
+                return result;
+            }
+        } catch (Exception e) {
+            result.put("hasError", true);
+            result.put("error", "更新出错"+e.getLocalizedMessage());
             log.error(e);
         }
         return result;

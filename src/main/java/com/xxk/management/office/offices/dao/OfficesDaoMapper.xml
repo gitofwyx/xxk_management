@@ -53,6 +53,39 @@
         updateUserId=#{updateUserId},updateDate=#{updateDate} where id=#{id} and deleteFlag='0';
     </update>
 
+    <!--以下的批量方法只能删除数据表的一样数据-->
+    <!-- 批量更新，通过 case when语句变相的进行批量更新 -->
+    <update id="updateOfficeCharToEn" parameterType="java.util.List" >
+        update xxk_offices
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="pinYin_code =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.id!=null">
+                        when id=#{item.id} then #{item.pinYin_code}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="pinYinS_code =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.id!=null">
+                        when id=#{item.id} then #{item.pinYinS_code}
+                    </if>
+                </foreach>
+            </trim>
+            <!--<trim prefix="gmt_modified =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="i.gmtModified!=null">
+                        when id=#{i.id} then #{i.gmtModified}
+                    </if>
+                </foreach>
+            </trim>-->
+        </trim>
+        WHERE id IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </update>
+
     <!--批量修改（批量逻辑删除） -->
     <!--以下的批量方法只能删除数据表的一样数据-->
     <update id="deleteListOffices" parameterType="java.util.List">

@@ -15,6 +15,8 @@ public interface OfficesService {
 
     public boolean addOffices(Offices office);
 
+    public boolean updateOfficeCharToEn(List<Offices> offices);
+
     public List<Map<String, Object>> getOfficeSelect();
 
     public int getUnderlingCount(String belong_to_id);

@@ -292,7 +292,12 @@ public class JsonUtils {
 				for (Field field : fields) {
 					if (jsonArr.getJSONObject(i).containsKey(field.getName())) {
 						field.setAccessible(true);
-						field.set(t, jsonArr.getJSONObject(i).getString(field.getName()));
+						String JOb=jsonArr.getJSONObject(i).getString(field.getName());
+						if("".equals(JOb)||"null".equals(JOb)){
+							continue;
+						}else {
+							field.set(t, jsonArr.getJSONObject(i).get(field.getName()));
+						}
 					}
 				}
 				result.add(t);

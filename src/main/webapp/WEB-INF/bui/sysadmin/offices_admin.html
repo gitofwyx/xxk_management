@@ -93,6 +93,7 @@
 <![endif]-->
 <script type="text/javascript" src="/js/tree/tree_build.js"></script>
 <script type="text/javascript" src="/js/localstorageIO.js"></script>
+<script type="text/javascript" src="/js/callback_ajax.js"></script>
 <script type="text/javascript">
     BUI.use('common/page');
 </script>
@@ -173,7 +174,8 @@
                                     alert('编辑');
                                 }
                             },
-                            {text: '<i class="icon-remove"></i>删除', btnCls: 'button button-small', handler: delFunction}
+                            {text: '<i class="icon-remove"></i>删除', btnCls: 'button button-small', handler: delFunction},
+                            {text: '<i class="icon-edit"></i>输入法支持(拼音)', btnCls: 'button button-small', handler: officeCharToEn}
                         ]
                     },
                     emptyDataTpl : '<div class="centered"><img alt="Crying" src="http://img03.taobaocdn.com/tps/i3/T1amCdXhXqXXXXXXXX-60-67.png"><h2>未获得到数据</h2></div>',
@@ -225,6 +227,15 @@
         function delFunction() {
             var selections = grid.getSelection();
             delItems(selections);
+        }
+
+        //
+        function officeCharToEn() {
+            var selections = grid.getSelection();
+            CD_ajaxAllParam("/officeCharToEn", {"offices":JSON.stringify(selections)},true,function (v) {
+                alert(v.error);
+            });
+
         }
 
         function delItems(items) {
