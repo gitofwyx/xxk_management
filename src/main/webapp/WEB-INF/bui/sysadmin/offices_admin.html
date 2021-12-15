@@ -140,7 +140,9 @@
                 columns = [
                     {title: '编号', dataIndex: 'office_ident',elCls: 'center', width: 40},
                     {title: '&nbsp科室名称', dataIndex: 'office_name',elCls: 'center', width: 100},
-                    {title: '&nbsp科室职能', dataIndex: 'office_property',elCls: 'center', width: 100},
+                    {title: '&nbsp拼音码', dataIndex: 'pinYin_code',elCls: 'center', width: 250},
+                    {title: '&nbsp拼音简码', dataIndex: 'pinYinS_code',elCls: 'center', width: 100},
+                    {title: '&nbsp五笔简码', dataIndex: 'wuBiS_code',elCls: 'center', width: 100},
                     {title: '&nbsp所属科室', dataIndex: 'belong_to_office', elCls: 'center',width: 100},
                     {title: '&nbsp备注', dataIndex: '', width: 350},
                     {
@@ -160,7 +162,7 @@
                         },
                         method: 'POST'
                     },
-                    pageSize: 6,
+                    pageSize: 12,
                     autoSync: true //保存数据后，自动更新
                 }),
                 gridCfg = Search.createGridCfg(columns, {

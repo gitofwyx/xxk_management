@@ -51,7 +51,7 @@ public class OfficesController extends BaseController {
                 return result;
             } else {
                 result.put("rows", listDevice);
-                result.put("results", 7);
+                result.put("results", 105);
             }
         } catch (Exception e) {
             log.error(e);

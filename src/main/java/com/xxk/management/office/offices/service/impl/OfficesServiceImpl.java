@@ -36,7 +36,7 @@ public class OfficesServiceImpl implements OfficesService {
 
     @Override
     public boolean updateOfficeCharToEn(List<Offices> offices) {
-        if(offices.size()>7||offices.isEmpty()){
+        if(offices.size()>12||offices.isEmpty()){
             return false;
         }
         for (int i = 0; i < offices.size(); i++){
