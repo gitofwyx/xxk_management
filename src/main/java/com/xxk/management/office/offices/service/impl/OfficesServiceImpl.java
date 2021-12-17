@@ -1,6 +1,7 @@
 package com.xxk.management.office.offices.service.impl;
 
 import com.xxk.core.util.ChineseCharToEnUtil;
+import com.xxk.core.util.DateUtil;
 import com.xxk.management.office.offices.dao.OfficesDao;
 import com.xxk.management.office.offices.entity.Offices;
 import com.xxk.management.office.offices.service.OfficesService;
@@ -31,7 +32,11 @@ public class OfficesServiceImpl implements OfficesService {
 
     @Override
     public boolean addOffices(Offices office) {
-        return dao.addOffices(office)==1?true:false;
+        boolean result=dao.addOffices(office)==1?true:false;
+        if (result){
+            dao.updateOfficesUDstatus("1","admin", office.getUpdateDate());
+        }
+        return result;
     }
 
     @Override
@@ -43,7 +48,11 @@ public class OfficesServiceImpl implements OfficesService {
             offices.get(i).setPinYin_code(ChineseCharToEnUtil.getPingYin(offices.get(i).getOffice_name()));
             offices.get(i).setPinYinS_code(ChineseCharToEnUtil.getFirstSpell(offices.get(i).getOffice_name()));
         }
-        return dao.updateOfficeCharToEn(offices)>=1?true:false;
+        boolean result=dao.updateOfficeCharToEn(offices)>=1?true:false;
+        if (result){
+            dao.updateOfficesUDstatus("1","admin", DateUtil.getFullTime());
+        }
+        return result;
     }
 
     @Override

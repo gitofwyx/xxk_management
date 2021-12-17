@@ -16,6 +16,8 @@ public interface OfficesDao {
 
     public int addOffices(Offices office);
 
+    public int updateOfficesUDstatus(String office_ident,String userId,String date);
+
     public int updateOfficeCharToEn(List<Offices> offices);
 
     public List<Map<String, Object>> getOfficeSelect();
